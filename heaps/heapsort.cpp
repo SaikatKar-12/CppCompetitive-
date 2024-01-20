@@ -17,7 +17,7 @@ void downheapify(int arr[],int idx,int bound){
     }
 }
 void heapsort(int arr[],int n){
-    for(int i=n-1;i>=0;i--){
+    for(int i=n/2;i>=0;i--){
         downheapify(arr,i,n);
     }
     for(int i=n-1;i>=0;i--){
@@ -26,8 +26,9 @@ void heapsort(int arr[],int n){
     }
 }
 int main(){
-    int arr[]={5,3,7,2,1};
-    heapsort(arr,5);
+    int arr[]={5,3,7,2,1,6};
+    int n=sizeof(arr)/sizeof(arr[0]);
+    heapsort(arr,n);
     for(auto x:arr){
         cout<<x<<" ";
     }
