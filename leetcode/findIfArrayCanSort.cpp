@@ -1,20 +1,37 @@
 #include<iostream>
+#include<unordered_map>
+#include<vector>
+#include<string>
 using namespace std;
-int countSetBits(int decimalNumber) {
-    int count = 0;
-
-    // Loop through each bit of the number
-    while (decimalNumber > 0) {
-        // Check if the least significant bit is set
-        count += decimalNumber & 1;
-
-        // Right shift the number to move to the next bit
-        decimalNumber >>= 1;
+int minimumPushes(string s) {
+        unordered_map<int,string> mp;
+        int j=2;
+        int ans=0;
+        for(int i=0;i<s.size();i++){
+            if(mp.find(j)==mp.end()){
+                ans++;
+                string c="";
+                c+=s[i];
+                mp[j]=c;
+            }else{
+                //cout<<"hello";
+                string c=mp[j];
+                c=c+s[i];
+                mp[j]=c;
+                cout<<c<<" ";
+                if(c.size()==2) ans=ans+2;
+                else if(c.size()==3) ans=ans+3;
+                else if(c.size()==4) ans=ans+4;
+                else ans=ans+5;
+            }
+            cout<< j <<" ";
+            j++;
+            if(j==10) j=2;
+        }
+        cout<<endl;
+        return ans;
     }
-
-    return count;
-}
 int main(){
-    cout<<countSetBits(30);
+    cout<<minimumPushes("amrvxnhsewkoipjyuclgtdbfq");
     return 0;
 }
