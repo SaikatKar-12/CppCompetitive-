@@ -1,6 +1,12 @@
 #include<stdio.h>
 #define size 100
 
+void swap(int *a,int *b){
+    int temp= *a;
+    *a=*b;
+    *b=temp;
+}
+
 // void merge(int arr[],int si,int mid,int ei){
 //     int i=si;
 //     int j=mid+1;
@@ -11,7 +17,7 @@
 //             temp[k]=arr[i];
 //             k++;
 //             i++;
-//         }else if(arr[i]>arr[j]){
+//         }else{
 //             temp[k]=arr[j];
 //             k++;
 //             j++;
@@ -34,18 +40,13 @@
 
 // void mergesort(int arr[],int si,int ei){
 //     if(si>=ei) return;
+
 //     int mid=(si+ei)/2;
 //     mergesort(arr,si,mid);
 //     mergesort(arr,mid+1,ei);
 
 //     merge(arr,si,mid,ei);
 // }
-
-void swap(int *a,int *b){
-    int temp= *a;
-    *a=*b;
-    *b=temp;
-}
 
 // int partition(int arr[],int si,int ei){
 //     int pivotEle=arr[si];
@@ -83,32 +84,34 @@ void swap(int *a,int *b){
 //     quicksort(arr,pi+1,ei);
 
 // }
-void downheapify(int arr[],int pi,int n){
-    while(pi<n){
-        int left=2*pi+1;
-        int right=2*pi+2;
-        int maxidx=pi;
-        if(left>=n) break;
-        if(arr[left]>arr[maxidx]) maxidx=left;
-        if(right<n && arr[right]>arr[maxidx]) maxidx=right;
-        if(maxidx!=pi){
-            swap(&arr[maxidx],&arr[pi]);
-            pi=maxidx;
-        }else break;
-    }
+
+// void downHeapify(int arr[],int pi,int n){
+//     while(pi<n){
+//         int lc=pi*2+1;
+//         int rc=pi*2+2;
+//         if(lc>=n) break;
+//         int maxidx=pi;
+//         if(arr[lc]>arr[maxidx]) maxidx=lc;
+//         if(rc<n && arr[rc]>arr[maxidx]) maxidx=rc;
+//         if(maxidx!=pi){
+//             swap(&arr[maxidx],&arr[pi]);
+//             pi=maxidx;
+//         }else break;
+//     }
     
-}
-void heapsort(int arr[],int n){
-    //heapify
-    for(int i=n/2;i>=0;i--){
-        downheapify(arr,i,n);
-    }
-    //sort
-    for(int i=n-1;i>=0;i--){
-        swap(&arr[i],&arr[0]);
-        downheapify(arr,0,i);
-    }
-}
+// }
+
+// void heapsort(int arr[],int n){
+//     //heapify the array
+//     for(int i=n/2;i>=0;i--){
+//         downHeapify(arr,i,n);
+//     }
+//     //sort the array
+//     for(int i=n-1;i>=0;i--){
+//         swap(&arr[i],&arr[0]);
+//         downHeapify(arr,0,i);
+//     }
+// }
 
 int main(){
     int n;
@@ -119,7 +122,7 @@ int main(){
     for(int i=0;i<n;i++){
         scanf("%d",&arr[i]);
     }
-    heapsort(arr,n);
+    mergesort(arr,0,n-1);
     for(int i=0;i<n;i++){
         printf("%d ",arr[i]);
     }
