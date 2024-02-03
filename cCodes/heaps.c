@@ -40,7 +40,7 @@ void heapsort(int arr[],int n){
     }
 }
 int main(){
-    int arr[]={40,14,9,8,12,5,49,2,1,42,20};
+    int arr[]={4, 7 ,2 ,5 ,9 ,6 ,4 ,1 ,5 ,11};
     int n=sizeof(arr)/sizeof(arr[0]);
     // for(int i=0;i<9;i++){
     //     upHeapify(arr,i);
