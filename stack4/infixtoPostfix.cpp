@@ -13,7 +13,7 @@ string solve(string val1,string val2,char ch){
     return s;
 }
 int main(){
-    string s="(5+6)*4/8-1";
+    string s="a+b-c*d/e";
     cout<<s<<endl;
     stack<string> val;
     stack<char> op;

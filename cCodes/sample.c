@@ -1,54 +1,60 @@
 #include<stdio.h>
-#include<string.h>
-void merge(int a[],int lo,int hi,int mid){
-    int i,j,k,b[100];
-    i=lo;
-    j=mid+1;
-    k=lo;
-    while(i<=mid && j<=hi){
-        if(a[i]<a[j]){
-            b[k]=a[i];
-            i++;
-            k++;
-        }else{
-            b[k]=a[j];
-            j++;
-            k++;
-        }
-    }
-    while(i<=mid){
-        b[k]=a[i];
-        i++;
-        k++;
-    }
-    while(j<=hi){
-        b[k]=a[j];
-        j++;
-        k++;
-    }
-    for(int i=lo;i<=hi;i++){
-        a[i]=b[i];
+#include<stdlib.h>
+#include<malloc.h>
+
+struct Node{
+    int data;
+    struct Node* next;
+};
+struct queue{
+    struct Node* front;
+    struct Node* rear;
+};
+struct queue* create_q(){
+    struct queue* q=(struct queue*)malloc(sizeof(struct queue));
+    q->front=NULL;
+    q->rear=NULL;
+    return q;
+}
+void enqueue(struct queue* q,int val){
+    struct Node* ptr=(struct Node*)malloc(sizeof(struct Node));
+    ptr->data=val;
+    ptr->next=NULL;
+    if(q->front==NULL){
+        q->front=ptr;
+        q->rear=ptr;
+    }else{
+        q->rear->next=ptr;
+        q->rear=ptr;
     }
 }
-void mergesort(int a[],int lo,int hi){
-    int mid;
-    if(lo<hi){
-        mid=(hi+lo)/2;
-        mergesort(a,lo,mid);
-        mergesort(a,mid+1,hi);
-        merge(a,lo,hi,mid);
+int dequeue(struct queue* q){
+    int temp;
+    if(q->front==NULL){
+        printf("queue empty\n");
+        return -1;
+    }else{
+        temp=q->front->data;
+        q->front=q->front->next;
     }
+    return temp;
+}
+void display(struct queue* q){
+    struct Node* temp=q->front;
+    while(temp){
+        printf("%d ",temp->data);
+        temp=temp->next;
+    }
+    printf("\n");
 }
 int main(){
-    int a[]={5,2,1,4,3};
-    int n=5;
-    for(int i=0;i<n;i++){
-        printf("%d ",a[i]);
-    }
-    printf("\n");
-    mergesort(a,0,n-1);
-    for(int i=0;i<n;i++){
-        printf("%d ",a[i]);
-    }
-    printf("\n");
+    struct queue* q=create_q();
+    enqueue(q,3);
+    enqueue(q,4);
+    enqueue(q,5);
+    enqueue(q,6);
+    display(q);
+    dequeue(q);
+    display(q);
+   return 0;
 }

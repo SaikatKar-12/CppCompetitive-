@@ -44,14 +44,14 @@ struct Node* InsertAt(int idx,struct Node* start){
     printf("Enter your data: ");
     scanf("%d", &val);
     new_node = (struct Node *)malloc(sizeof(struct Node));
-        new_node->data = val;
-            ptr=start;
-            for(int i=1;i<idx;i++){
-                ptr=ptr->next;
-            }
-            new_node->next=ptr->next;
-            ptr->next=new_node;
-        return start;
+    new_node->data = val;
+    ptr=start;
+    for(int i=1;i<idx;i++){
+        ptr=ptr->next;
+    }
+    new_node->next=ptr->next;
+    ptr->next=new_node;
+    return start;
 }
     struct Node *display(struct Node * start)
     {
@@ -70,6 +70,34 @@ struct Node* deleteEnd(struct Node *start){
         ptr=ptr->next;
     }
     ptr->next=NULL;
+    return start;
+}
+struct Node* insertatBeg(struct Node* start){
+    int n;
+    printf("Enter data:");
+    scanf("%d",&n);
+    struct Node* ptr=(struct Node*)malloc(sizeof(struct Node));
+    ptr->data=n;
+    ptr->next=start;
+    start=ptr;
+    return start;
+}
+struct Node* insertAtmid(struct Node* start){
+    struct Node* slow;
+    struct Node* fast;
+    slow=start;
+    fast=start;
+    while(fast->next!=NULL && fast->next->next!=NULL){
+        slow=slow->next;
+        fast=fast->next->next;
+    }
+    int n;
+    printf("Enter data:");
+    scanf("%d",&n);
+    struct Node* ptr=(struct Node*)malloc(sizeof(struct Node));
+    ptr->data=n;
+    ptr->next=slow->next;
+    slow->next=ptr;
     return start;
 }
 struct Node* mergeList(struct Node* a,struct Node* b){

@@ -16,7 +16,7 @@ int partition(int arr[],int si,int ei){
     swap(&arr[(si+ei)/2],&arr[pi]);
     int i=si;
     int j=ei;
-    printf("%d ",arr[pi]);
+    //printf("%d ",arr[pi]);
     while(i<pi && j>pi){
         if(arr[i]<=pivotEle) i++;
         if(arr[j]>pivotEle) j--;

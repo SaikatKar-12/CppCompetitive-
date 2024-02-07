@@ -58,10 +58,6 @@ int main(){
     root=insertEle_itr(root,8);
     root=insertEle_itr(root,2);
     root=insertEle_itr(root,7);
-    root=insertEle_itr(root,6);
-    root=insertEle_itr(root,3);
-    root=insertEle_itr(root,1);
-    root=insertEle_itr(root,5);
     root=insertEle_itr(root,10);
     root=insertEle_itr(root,9);
     inorder(root);

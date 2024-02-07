@@ -15,23 +15,23 @@ void swap(int *a,int *b){
 //     while(i<=mid && j<=ei){
 //         if(arr[i]<=arr[j]){
 //             temp[k]=arr[i];
-//             k++;
 //             i++;
+//             k++;
 //         }else{
 //             temp[k]=arr[j];
-//             k++;
 //             j++;
+//             k++;
 //         }
 //     }
 //     while(i<=mid){
 //         temp[k]=arr[i];
-//         k++;
-//         i++;
+//             i++;
+//             k++;
 //     }
 //     while(j<=ei){
 //         temp[k]=arr[j];
-//         k++;
-//         j++;
+//             j++;
+//             k++;
 //     }
 //     for(int x=si;x<k;x++){
 //         arr[x]=temp[x];
@@ -40,11 +40,9 @@ void swap(int *a,int *b){
 
 // void mergesort(int arr[],int si,int ei){
 //     if(si>=ei) return;
-
 //     int mid=(si+ei)/2;
 //     mergesort(arr,si,mid);
 //     mergesort(arr,mid+1,ei);
-
 //     merge(arr,si,mid,ei);
 // }
 
@@ -52,66 +50,55 @@ void swap(int *a,int *b){
 //     int pivotEle=arr[si];
 //     int count=0;
 //     for(int i=si+1;i<=ei;i++){
-//         if(arr[i]<=pivotEle){
-//             count++;
-//         }
+//         if(arr[i]<=pivotEle) count++;
 //     }
 //     int pi=si+count;
-//     //printf("%d ",arr[pi]);
-//     swap(&arr[si],&arr[pi]);
+//     swap(&arr[pi],&arr[si]);
 //     int i=si;
 //     int j=ei;
 //     while(i<pi && j>pi){
 //         if(arr[i]<=pivotEle) i++;
-//         if(arr[j]>pivotEle) j--;
-//         if(arr[i]>pivotEle && arr[j]<=pivotEle) {
+//         else if(arr[j]>pivotEle) j--;
+//         else{
 //             swap(&arr[i],&arr[j]);
-//             //printf("%d %d",arr[i],arr[j]);
 //             i++;
 //             j--;
 //         }
 //     }
-
 //     return pi;
 // }
 
 // void quicksort(int arr[],int si,int ei){
 //     if(si>=ei) return;
-
 //     int pi=partition(arr,si,ei);
-
 //     quicksort(arr,si,pi-1);
 //     quicksort(arr,pi+1,ei);
-
 // }
 
-// void downHeapify(int arr[],int pi,int n){
-//     while(pi<n){
-//         int lc=pi*2+1;
-//         int rc=pi*2+2;
-//         if(lc>=n) break;
-//         int maxidx=pi;
-//         if(arr[lc]>arr[maxidx]) maxidx=lc;
-//         if(rc<n && arr[rc]>arr[maxidx]) maxidx=rc;
-//         if(maxidx!=pi){
-//             swap(&arr[maxidx],&arr[pi]);
-//             pi=maxidx;
-//         }else break;
-//     }
-    
-// }
+void downheapify(int arr[],int pi,int n){
+    while(pi<n){
+        int lc=2*pi+1;
+        int rc=2*pi+2;
+        if(lc>=n) break;
+        int maxidx=pi;
+        if(arr[lc]>arr[maxidx]) maxidx=lc;
+        if(rc<n && arr[rc]>arr[maxidx]) maxidx=rc;
+        if(maxidx!=pi){
+            swap(&arr[pi],&arr[maxidx]);
+            pi=maxidx;
+        }else break;
+    }
+}
 
-// void heapsort(int arr[],int n){
-//     //heapify the array
-//     for(int i=n/2;i>=0;i--){
-//         downHeapify(arr,i,n);
-//     }
-//     //sort the array
-//     for(int i=n-1;i>=0;i--){
-//         swap(&arr[i],&arr[0]);
-//         downHeapify(arr,0,i);
-//     }
-// }
+void heapsort(int arr[],int n){
+    for(int i=n/2;i>=0;i--){
+        downheapify(arr,i,n);
+    }
+    for(int i=n-1;i>=0;i--){
+        swap(&arr[0],&arr[i]);
+        downheapify(arr,0,i-1);
+    }
+}
 
 int main(){
     int n;
@@ -122,7 +109,7 @@ int main(){
     for(int i=0;i<n;i++){
         scanf("%d",&arr[i]);
     }
-    mergesort(arr,0,n-1);
+    heapsort(arr,n);
     for(int i=0;i<n;i++){
         printf("%d ",arr[i]);
     }

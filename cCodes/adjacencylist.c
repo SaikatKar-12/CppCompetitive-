@@ -90,7 +90,7 @@ int main() {
     addEdge(graph, 6, 4);
 
     // Print the adjacency list representation of the graph
-    //printGraph(graph);
-    dfs(graph,0);
+    printGraph(graph);
+    //dfs(graph,0);
     return 0;
 }
