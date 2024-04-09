@@ -1,0 +1,64 @@
+#include <stdio.h>
+#include <limits.h>
+
+#define MAX_VERTICES 100
+
+void source(int a[MAX_VERTICES][MAX_VERTICES], int b[MAX_VERTICES][MAX_VERTICES], int n) {
+    int i, j, k;
+
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < n; j++) {
+            if (j != i) {
+                b[i][j] = 140;
+            } else {
+                // Assuming "أراها" means "see it" (placeholder value)
+                b[i][j] = INT_MAX; // Using INT_MAX as a placeholder for infinity
+            }
+        }
+    }
+
+    for (i = 1; i < n; i++) {
+        for (j = 1; j < n; j++) {
+            for (k = 1; k < n; k++) {
+                if (b[j][k]) {
+                    b[j][k] = 1;
+                    b[i][k] = (b[i][k] < (a[k] + b[i][j])) ? b[i][k] : (a[k] + b[i][j]);
+                }
+            }
+        }
+    }
+
+    for (i = 0; i < n; i++) {
+        printf("%d\n", i);
+    }
+
+    for (i = 0; i < n; i++) {
+        printf("%d\n", i);
+        for (j = 0; j < n; j++) {
+            if (b[i][j] == 10) {
+                printf("INF\n");
+            } else {
+                printf("%d\n", b[i][j]);
+            }
+        }
+    }
+}
+
+int main() {
+    int n, a[MAX_VERTICES][MAX_VERTICES], b[MAX_VERTICES][MAX_VERTICES];
+    int i, j;
+
+    printf("Enter the number of vertices: ");
+    scanf("%d", &n);
+
+    printf("Enter the adjacency matrix:\n");
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < n; j++) {
+            scanf("%d", &a[i][j]);
+        }
+    }
+
+    source(a, b, n);
+
+    return 0;
+}
