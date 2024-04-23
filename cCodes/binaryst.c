@@ -232,7 +232,28 @@ void inorder_itr(struct TreeNode* root){
             node=temp->right;
         }
     }
-}
+ }
+// void inorder_itr(struct TreeNode* root){
+//     struct TreeNode** st=(struct TreeNode**)malloc(sizeof(struct TreeNode*)*100);
+//     int top=-1;
+//     struct TreeNode* node=root;
+//     top++;
+//     st[top]=node;
+//     node=node->left;
+//     while(node!=NULL && top!=-1){
+//         if(node){
+//             top++;
+//             st[top]=node;
+//             node=node->left;
+//         }else{
+//             struct TreeNode* temp=st[top];
+//             top--;
+//             printf("%d ",temp->val);
+//             node=temp->right;
+//         }
+
+//     }
+// }
 int main(){
     root=insertEle_rec(root,8);
     root=insertEle_rec(root,2);
@@ -243,7 +264,7 @@ int main(){
     root=insertEle_rec(root,5);
     root=insertEle_rec(root,10);
     root=insertEle_rec(root,9);
-    inorder(root);
+    //inorder(root);
     printf("\n");
     inorder_itr(root);
     return 0;
