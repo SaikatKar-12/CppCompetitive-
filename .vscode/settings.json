@@ -73,6 +73,7 @@
         "xstring": "cpp",
         "xtr1common": "cpp",
         "map": "cpp",
-        "malloc.h": "c"
+        "malloc.h": "c",
+        "limits.h": "c"
     }
 }
